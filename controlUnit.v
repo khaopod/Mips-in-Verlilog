@@ -16,38 +16,61 @@
 //
 //=====================
 
-module controlUnit (
-	op,
-	ins
-	);
+module controlUnit(
+		input  wire	[5:0]	opcode,
+		output reg			branch_eq, branch_ne,
+		output reg [1:0]	aluop,
+		output reg			memread, memwrite, memtoreg,
+		output reg			regdst, regwrite, alusrc
+		);
 
-parameter OPCODE_WIDTH = 6;
-parameter OUTPUT_WIDTH = 9;
+	always @(*) begin
+		/* defaults */
+		aluop[1:0]	<= 2'b10;
+		alusrc		<= 1'b0;
+		branch_eq	<= 1'b0;
+		branch_ne	<= 1'b0;
+		memread		<= 1'b0;
+		memtoreg	<= 1'b0;
+		memwrite	<= 1'b0;
+		regdst		<= 1'b1;
+		regwrite	<= 1'b1;
 
-//----------- INPUT
-input 		[OPCODE_WIDTH-1:0] 	op 	;
-
-//----------- OUTPUT
-output reg 	[OUTPUT_WIDTH-1:0] 	ins	;
-
-//----------- Code
-wire and_1,and_2,and_3,and_4;
-assign and_1 = (!op[0] && !op[1] && !op[2] && !op[3] && !op[4] && !op[5]);
-assign and_2 = (op[0] && op[1] && !op[2] && !op[3] && !op[4] && op[5]);
-assign and_3 = (op[0] && op[1] && !op[2] && op[3] && !op[4] && op[5]);
-assign and_4 = (!op[0] && !op[1] && op[2] && !op[3] && !op[4] && !op[5]);
-
-assign ins[0] = and_1; // RegDst
-assign ins[1] = (and_2 || and_3); // AluSrc
-assign ins[2] = and_2; // MemtoReg
-assign ins[3] = (and_1 || and_2); // RegWrite
-assign ins[4] = and_2; // MemRead
-assign ins[5] = and_3; // MemWrite
-assign ins[6] = and_4; // Branch
-assign ins[7] = and_1; // ALUOp1
-assign ins[8] = and_4; // ALUOp0
-
-
+		case (opcode)
+			6'b100011: begin	/* lw */
+				memread  <= 1'b1;
+				regdst   <= 1'b0;
+				memtoreg <= 1'b1;
+				aluop[1] <= 1'b0;
+				alusrc   <= 1'b1;
+			end
+			6'b001000: begin	/* addi */
+				regdst   <= 1'b0;
+				aluop[1] <= 1'b0;
+				alusrc   <= 1'b1;
+			end
+			6'b000100: begin	/* beq */
+				aluop[0]  <= 1'b1;
+				aluop[1]  <= 1'b0;
+				branch_eq <= 1'b1;
+				regwrite  <= 1'b0;
+			end
+			6'b101011: begin	/* sw */
+				memwrite <= 1'b1;
+				aluop[1] <= 1'b0;
+				alusrc   <= 1'b1;
+				regwrite <= 1'b0;
+			end
+			6'b000101: begin	/* bne */
+				aluop[0]  <= 1'b1;
+				aluop[1]  <= 1'b0;
+				branch_ne <= 1'b1;
+				regwrite  <= 1'b0;
+			end
+			6'b000000: begin	/* add */
+			end
+		endcase
+	end
 endmodule
 
 
