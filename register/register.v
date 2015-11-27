@@ -4,7 +4,7 @@ module register(
 input [4:0]read1,read2,reg_write,
   input [31:0]wdata,
 input write,
-  output reg [4:0]data1,data2
+  output reg [31:0]data1,data2
 
 );
 

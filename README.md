@@ -1,10 +1,10 @@
 
 # Mips CPU Project
-____
+
 ## Compiling
 To run verilog on our project use `iverilog` as a compiler with this follow code.
 ```
-iverilog -o topmodule topmodule.v /imem/imem.v /cUnit/cUnit.v
+iverilog -o topmodule topmodule.v ./imem/imem.v ./cUnit/cUnit.v ./ALUcontrol/ALUcontrol.v ./ALU/ALU.v ./mux/mux32b.v ./register/register.v ./dmem/dmem.v ./shift/shiftL2.v
 ```
 
 ## Test Bench
@@ -17,4 +17,4 @@ You can also check its result by dump the file and open it by `gtkwave` applicat
 
 
 ### Currently working on
-- Top Module
+- Implementing Top Module with ALU
