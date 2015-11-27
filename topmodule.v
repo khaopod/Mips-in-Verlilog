@@ -7,10 +7,10 @@ input clk;
 
 //wire [31:0] in;
 wire clock;
-output reg			branch_eq, branch_ne;
-output reg [1:0]	aluop;
-output reg			memread, memwrite, memtoreg;
-output reg			regdst, regwrite, alusrc;
+wire			branch_eq, branch_ne;
+wire [1:0]	aluop;
+wire			memread, memwrite, memtoreg;
+wire			regdst, regwrite, alusrc;
 wire [31:0] instruction;
 
 instructionmemory instruction1 (address,instruction);
@@ -18,11 +18,6 @@ controlUnit control(instruction[31:26], branch_eq,branch_ne,aluop,memread,memwri
 
 always @(posedge clk) 
 begin
-
-	instruction = 0;
-	#20
-	instruction = 1;
-
 
 
 end
