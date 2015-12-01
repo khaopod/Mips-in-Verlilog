@@ -1,0 +1,50 @@
+$date
+	Fri Nov 27 23:18:14 2015
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1s
+$end
+$scope module ALUControl_t $end
+$var reg 32 ! address [31:0] $end
+$var reg 1 " clk $end
+$upscope $end
+$scope module dmem $end
+$var wire 32 # address [31:0] $end
+$var wire 32 $ dataIn [31:0] $end
+$var wire 1 % readmode $end
+$var wire 1 & writemode $end
+$var reg 32 ' dataOut [31:0] $end
+$upscope $end
+$scope module mux32 $end
+$var wire 32 ( in0 [31:0] $end
+$var wire 32 ) in1 [31:0] $end
+$var wire 1 * sel $end
+$var reg 32 + out [31:0] $end
+$upscope $end
+$scope module shift $end
+$var wire 6 , in [5:0] $end
+$var wire 6 - out [5:0] $end
+$var reg 8 . temp [7:0] $end
+$upscope $end
+$enddefinitions $end
+#0
+$dumpvars
+bz00 .
+bz00 -
+bz ,
+bz +
+z*
+bz )
+bz (
+bx '
+z&
+z%
+bz $
+bz #
+x"
+b0 !
+$end
+#20
