@@ -13,7 +13,7 @@ module dmem(dataOut, address, dataIn, readmode, writemode);
         if (writemode == 1)
             dMemory[address]=dataIn; //store data
         if (readmode == 1)
-            dataOut = memory[address]; //load data
+            dataOut = dMemory[address]; //load data
     end
 
 endmodule
