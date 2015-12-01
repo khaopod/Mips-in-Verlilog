@@ -4,7 +4,7 @@ module mux32(out, in0, in1, sel);
     input [31:0] in1;
 	input sel;
 
-  	always @(sel or in0 or in1)
+  	always @(sel)
     begin
       if (sel==0)
             out = in0;
