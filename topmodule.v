@@ -1,5 +1,5 @@
 module processorinput (
-	address,clk
+	address,clk,outALU
 	);
 
 input [31:0] address;
@@ -26,10 +26,10 @@ register regis(instruction[25:21],instruction[20:16],instruction[15:11],memData,
 ALUControl aluControl(aluop,instruction[5:0],ALUCon);
 ALU alu(ALUCon,data1,data2,outALU,zero);
 
-always @(posedge clk) 
-begin
+// always @(posedge clk) 
+// begin
 
 
-end
+// end
 
 endmodule

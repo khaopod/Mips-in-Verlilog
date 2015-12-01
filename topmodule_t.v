@@ -16,20 +16,21 @@ module ALUControl_t();
   wire zero;
 
   //--- call module
-processorinput process(address, clk);
+processorinput process(address, clk, outALU);
   
   initial begin
     //--- dump the file 
     $dumpfile("dump.vcd");
     $dumpvars(1);
-
+    clk = 0;
     address = 32'b00000000000000000000000000000000;
     #20
 
     $finish;
   end
 
-   always
+   always begin
  #10 clk = ~clk; 
+ end
   
 endmodule
