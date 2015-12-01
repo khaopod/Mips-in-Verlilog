@@ -5,11 +5,15 @@ module dmem(dataOut, address, dataIn, readmode, writemode);
     input readmode;
     input writemode;
 
+    reg [31:0] dMemory [511:0];
 
+    //do when read or write signal is recieved
     always@ (readmode or writemode)
     begin
         if (writemode == 1)
+            dMemory[address]=dataIn; //store data
         if (readmode == 1)
+            dataOut = memory[address]; //load data
     end
 
 endmodule
