@@ -1,19 +1,15 @@
-module dmem(dataOut, address, dataIn, readmode, writemode);
-    output reg [31:0] dataOut;
-    input [31:0] address;
-    input [31:0] dataIn;
-    input readmode;
-    input writemode;
+module dmem (
+  input clk,
+  input [31:0] address, dataIn,
+  input writemode, readmode,
+  output [31:0] dataOut
+);
 
-    reg [31:0] dMemory [9999:0];
+  reg [31:0] Mem [2499:250];
 
-    //do when read or write signal is recieved
-    always@ (readmode or writemode)
-    begin
-        if (writemode == 1)
-            dMemory[address]=dataIn; //store data
-        else if (readmode == 1)
-            dataOut = dMemory[address]; //load data
-    end
-
+  always @(negedge clk) begin
+    if(writemode)
+      Mem[address >> 2] = dataIn;
+  end
+     assign dataOut = readmode ? Mem[address >> 2] : 0;
 endmodule
