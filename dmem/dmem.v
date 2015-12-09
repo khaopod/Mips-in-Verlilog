@@ -7,13 +7,6 @@ module dmem(dataOut, address, dataIn, readmode, writemode);
 
     reg [31:0] dMemory [9999:0];
 
-    integer i;
-    initial begin
-       //Zero all the cells.
-      for (i = 0; i<10000; i = i + 1)
-        dMemory[i] = 0;
-    end
-
     //do when read or write signal is recieved
     always@ (readmode or writemode)
     begin
