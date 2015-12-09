@@ -5,14 +5,21 @@ module dmem(dataOut, address, dataIn, readmode, writemode);
     input readmode;
     input writemode;
 
-    reg [31:0] dMemory [511:0];
+    reg [31:0] dMemory [9999:0];
+
+    integer i;
+    initial begin
+       //Zero all the cells.
+      for (i = 0; i<10000; i = i + 1)
+        dMemory[i] = 0;
+    end
 
     //do when read or write signal is recieved
     always@ (readmode or writemode)
     begin
         if (writemode == 1)
             dMemory[address]=dataIn; //store data
-        if (readmode == 1)
+        else if (readmode == 1)
             dataOut = dMemory[address]; //load data
     end
 
