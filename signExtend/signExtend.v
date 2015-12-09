@@ -5,7 +5,7 @@ module signExtend(bitOut, bitIn);
     //do when read or write signal is recieved
   always@ (bitIn)
     begin
-      bitOut={bitIn,16'h00000000};
+      bitOut={16'b0000_0000_0000_0000,bitIn};
     end
 
 endmodule

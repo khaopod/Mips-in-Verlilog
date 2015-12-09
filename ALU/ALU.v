@@ -12,15 +12,10 @@ always @(*) begin
 			4'b0001:  out <= a | b;				/* or */
 			4'b0000:  out <= a & b;				/* and */
 			4'b0111:  begin if(a < b) 
-<<<<<<< HEAD
-							out <= 32'b1;
-						else
-=======
-							out <= 32'b000000000000000000000000000000001; 
+							out <= 32'd1; 
 						else 
->>>>>>> 45afe022f739521bccd7eb2f990754ee0a31c950
-                          out <= 32'b0; end
-			default: out <= 32'b0;
+                          out <= 32'd0; end
+			default: out <= 32'd0;
 		endcase
 	end
   

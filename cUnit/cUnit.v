@@ -21,9 +21,14 @@ module controlUnit(
 		output reg			branch_eq, branch_ne,
 		output reg [1:0]	aluop,
 		output reg			memread, memwrite, memtoreg,
-		output reg			regdst, regwrite, alusrc
+		output reg			regdst, regwrite, alusrc,
+		input clk,
+		output reg			jump,
+		output reg 			jumpReg,
+		output reg 			jal
 		);
 
+	
 	always @(*) begin
 		/* defaults */
 		aluop[1:0]	<= 2'b10;
@@ -35,6 +40,9 @@ module controlUnit(
 		memwrite	<= 1'b0;
 		regdst		<= 1'b1;
 		regwrite	<= 1'b1;
+		jump        <= 1'b0;
+		jumpReg     <= 1'b0;
+		jal			<= 1'b0;
 
 		case (opcode)
 			6'b100011: begin	/* lw */
@@ -48,6 +56,7 @@ module controlUnit(
 				regdst   <= 1'b0;
 				aluop[1] <= 1'b0;
 				alusrc   <= 1'b1;
+				memread  <= 1'b0;
 			end
 			6'b000100: begin	/* beq */
 				aluop[0]  <= 1'b1;
@@ -68,6 +77,16 @@ module controlUnit(
 				regwrite  <= 1'b0;
 			end
 			6'b000000: begin	/* add */
+
+			end
+			6'b000010: begin	/* j jump */
+				jump <= 1'b1;
+			end
+			6'b000011: begin 	/* jal */
+				jal <= 1'b1;
+			end
+			6'h08: begin	/* jr jump register */
+				jumpReg <= 1'b1;
 			end
 		endcase
 	end

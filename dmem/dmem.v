@@ -1,13 +1,14 @@
 module dmem (
   input clk,
+  output [31:0] dataOut,
   input [31:0] address, dataIn,
-  input writemode, readmode,
-  output [31:0] dataOut
+  input writemode, readmode
+  
 );
 
   reg [31:0] Mem [2499:250];
 
-  always @(negedge clk) begin
+  always @(*) begin
     if(writemode)
       Mem[address >> 2] = dataIn;
   end
