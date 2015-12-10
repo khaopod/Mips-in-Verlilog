@@ -26,6 +26,7 @@ module topmodule_t();
   wire [31:0] jumpAddress;
   wire jump,jal;
   wire [4:0] wrRegis;
+  wire [31:0] dataToReg;
 
   //--- call module
 processorinput process(clk, outALU,ALUCon, 
@@ -33,7 +34,7 @@ processorinput process(clk, outALU,ALUCon,
   instruction,zero,dataOut,alusrc,aluop,address,
   selBranch,shiftBranch,addAddress,PC4,regwrite,
   memread, memwrite,memtoreg,jumpAddress,jump,regdst,jal,
-  wrRegis
+  wrRegis, dataToReg
   );
   
   initial begin

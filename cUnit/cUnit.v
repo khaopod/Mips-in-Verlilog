@@ -81,8 +81,10 @@ module controlUnit(
 			end
 			6'b000010: begin	/* j jump */
 				jump <= 1'b1;
+				jal <= 1'b1;
 			end
 			6'b000011: begin 	/* jal */
+			jump <= 1'b1;
 				jal <= 1'b1;
 			end
 			6'h08: begin	/* jr jump register */

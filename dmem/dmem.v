@@ -13,4 +13,5 @@ module dmem (
       Mem[address >> 2] = dataIn;
   end
      assign dataOut = readmode ? Mem[address >> 2] : 0;
+     
 endmodule
